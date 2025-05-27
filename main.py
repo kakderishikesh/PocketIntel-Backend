@@ -1,3 +1,4 @@
+print("Starting FastAPI app...")
 from fastapi import FastAPI, Request
 from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
