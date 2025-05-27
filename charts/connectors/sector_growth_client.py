@@ -1,17 +1,11 @@
-import yfinance as yf
+from stockprice_client import fetch_stock_price_data
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 import asyncio
 
 
-async def get_sector_typical_prices(period: str = "6mo", interval: str = "1d") -> pd.DataFrame:
-    """
-    Asynchronously fetch typical price = (High + Low + Close) / 3 for sector ETFs.
-
-    Returns:
-        pd.DataFrame: Sector-wise typical prices.
-    """
+async def get_sector_typical_prices(period: str = "6mo") -> pd.DataFrame:
     sector_etfs = {
         "Technology": "XLK",
         "Financials": "XLF",
@@ -25,30 +19,21 @@ async def get_sector_typical_prices(period: str = "6mo", interval: str = "1d") -
         "Communication Services": "XLC"
     }
 
-    tickers = list(sector_etfs.values())
-
-    # Async wrapper around yfinance.download
-    data = await asyncio.to_thread(
-        yf.download,
-        tickers,
-        period=period,
-        interval=interval,
-        group_by="ticker",
-        auto_adjust=True,
-        progress=False
-    )
-
-    typical_prices = pd.DataFrame()
-
-    for sector, ticker in sector_etfs.items():
-        df = data[ticker]
-        if {"High", "Low", "Close"}.issubset(df.columns):
+    async def get_typical_price(sector, ticker):
+        try:
+            df = await fetch_stock_price_data(ticker, period=period, full_ohlc=True)
+            df.set_index("Date", inplace=True)
             typical = (df["High"] + df["Low"] + df["Close"]) / 3
-            typical_prices[sector] = typical
+            return sector, typical
+        except Exception as e:
+            print(f"[{sector}] Failed to fetch typical price: {e}")
+            return sector, None
 
-    return typical_prices
+    tasks = [get_typical_price(sector, ticker) for sector, ticker in sector_etfs.items()]
+    results = await asyncio.gather(*tasks)
+    print(pd.DataFrame({sector: ts for sector, ts in results if ts is not None}))
 
-
+    return pd.DataFrame({sector: ts for sector, ts in results if ts is not None})
 async def plot_absolute_prices(highlight_sector: str = None):
     df = await get_sector_typical_prices()
     plt.figure(figsize=(14, 8))
@@ -92,5 +77,6 @@ async def plot_normalized_growth(highlight_sector: str = None):
 
 
 if __name__ == "__main__":
-    asyncio.run(plot_absolute_prices(highlight_sector="Technology"))
-    asyncio.run(plot_normalized_growth(highlight_sector="Technology"))
+    # asyncio.run(plot_absolute_prices(highlight_sector="Technology"))
+    # asyncio.run(plot_normalized_growth(highlight_sector="Technology"))
+    asyncio.run(get_sector_typical_prices())
