@@ -4,7 +4,7 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 
-from stockprice_client import fetch_stock_price_data
+from charts.connectors.stockprice_client import fetch_stock_price_data
 
 # --- Logging setup ---
 logging.basicConfig(
