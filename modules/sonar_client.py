@@ -10,10 +10,10 @@ async def fetch_single_prompt(client: httpx.AsyncClient, prompt: Dict[str, Any])
     payload = {
         "model": "sonar",
         "messages": [
-            {"role": "system", "content": "Be concise and informative. Include sources where applicable."},
+            {"role": "system", "content": "Be concise and informative. Include sources always."},
             {"role": "user", "content": prompt["prompt"]}
         ],
-        "temperature": 0.7,
+        "temperature": 0.4,
         "max_tokens": 500,
         "web_search_options": {
             "search_context_size": prompt.get("context_size", "medium")
@@ -31,7 +31,7 @@ async def fetch_single_prompt(client: httpx.AsyncClient, prompt: Dict[str, Any])
         json_data = response.json()
         message = json_data["choices"][0]["message"]
         content = message.get("content", "")
-        citations = message.get("citations", [])
+        citations = json_data.get("citations", [])
         return {
             "pillar": prompt["pillar"],
             "content": content,

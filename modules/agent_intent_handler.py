@@ -20,7 +20,7 @@ def get_subject_and_focus_from_agent(query: str) -> dict:
                 "role": "system",
                 "content": (
                     "You are an AI assistant that detects whether a query needs analytical breakdown "
-                    "(like financial, market, news, competitor analysis, adoption, contextual), or is a factual question that can be directly answered.\n"
+                    "(like financial, market, news, competitor analysis, adoption, contextual), or is a factual question that can be directly answered with citations.\n"
                     "Also assign a sector from the following ['Technology', 'Healthcare', 'Financials', 'Consumer Discretionary', 'Industrials', 'Materials', 'Utilities', 'Real Estate', 'Communication Services'].\n"
                     "Also assign a stock ticker to the subject if possible.\n"
                     "Respond ONLY in this strict JSON format:\n"
@@ -78,8 +78,7 @@ def get_subject_and_focus_from_agent(query: str) -> dict:
         if output["type"] == "analysis" and not output["focus"]:
             output["focus"] = DEFAULT_PILLARS
 
-        if output["type"] == "direct_answer":
-            output["citations"] = citations
+        output["citations"] = citations
 
         return output
 

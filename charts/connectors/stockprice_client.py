@@ -48,6 +48,7 @@ async def fetch_stock_price_data(ticker: str, period: str = "6mo") -> pd.DataFra
         raise ValueError(f"No stock price data returned for ticker: {ticker}")
 
     df = pd.DataFrame(data)
+    
 
     if "t" not in df.columns:
         raise KeyError("Timestamp column 't' not found in Polygon API response.")
@@ -61,7 +62,10 @@ async def fetch_stock_price_data(ticker: str, period: str = "6mo") -> pd.DataFra
         "v": "Volume"
     }, inplace=True)
 
-    return df[["Date", "Open", "High", "Low", "Close", "Volume"]]
+    # Drop rows with missing or invalid values
+    df.dropna(subset=["Date", "Close"], inplace=True)
+
+    return df[["Date", "Close"]].reset_index(drop=True)
 
 if __name__ == "__main__":
     ticker = "NVDA"

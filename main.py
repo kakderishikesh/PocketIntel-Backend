@@ -37,6 +37,7 @@ async def analyze(input: QueryInput):
     query = input.query
     output = {"summary": {}, "charts": []}
 
+    # Step 1: Intent recognition
     try:
         intent = get_subject_and_focus_from_agent(query)
         print("intent:", intent)
@@ -56,7 +57,9 @@ async def analyze(input: QueryInput):
     ticker = intent.get("ticker")
     focuses = intent.get("focus", [])
 
+    # Step 2: Chart generation (run concurrently)
     chart_tasks = []
+
     try:
         if sector:
             chart_tasks.append(get_sector_typical_prices())
@@ -65,6 +68,7 @@ async def analyze(input: QueryInput):
         if subject:
             chart_tasks.append(fetch_google_trend_data(subject))
             chart_tasks.append(fetch_news_sentiment_data(subject))
+
         chart_results = await asyncio.gather(*chart_tasks, return_exceptions=True)
     except Exception as e:
         print(f"[Chart Gathering Error] {e}")
@@ -101,6 +105,7 @@ async def analyze(input: QueryInput):
     except Exception as e:
         print(f"[Chart Processing Error] {e}")
 
+    # Step 3: Generate prompts and fetch sonar responses
     try:
         prompts = generate_prompts(subject, focuses)
         responses = await fetch_sonar_responses(prompts)
