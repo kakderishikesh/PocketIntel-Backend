@@ -13,7 +13,7 @@ from modules.summarizer import generate_360_summary
 from modules.agent_intent_handler import get_subject_and_focus_from_agent
 
 from charts.connectors.sector_growth_client import get_sector_typical_prices
-from charts.connectors.stockprice_client import fetch_stock_price_data
+from charts.connectors.stockprice_client_tiingo import fetch_stock_price_data
 from charts.connectors.pytrends_client import fetch_google_trend_data
 from charts.connectors.newsapi_client import fetch_news_sentiment_data
 from charts.chart_utils import format_chart_block
