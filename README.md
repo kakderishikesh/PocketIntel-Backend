@@ -96,24 +96,32 @@ PocketIntel-Backend/
    
 2. **Set up environment variables**
     Create a .env file with your API keys:
+   ```
     POLYGON_API_KEY=your_key
     TIINGO_API_KEY=your_key
     SONAR_API_KEY=your_key
+    ```
 3. **Install dependencies**
-     pip install -r requirements.txt
+  ```
+   pip install -r requirements.txt
+  ```
 4. **Run the server**
-     uvicorn main:app --reload
+  ```
+      uvicorn main:app --reload
+  ```
 
 ## 🧩 Key Endpoints
+```
 POST /analyze
+```
 Accepts a query string and returns structured analysis blocks for frontend rendering.
 
 ## 📡 External APIs Used
-Perplexity Sonar	Intent detection + article insights
-Tiingo	Historical stock price data
-Polygon.io	Fallback stock data provider
-NewsAPI	News headlines
-Google Trends	Search interest and trend signals
+ - Perplexity Sonar	Intent detection + article insights
+ - Tiingo	Historical stock price data
+ - Polygon.io	Fallback stock data provider
+ - NewsAPI	News headlines
+ - Google Trends	Search interest and trend signals
 
 ## Contact Information
 
