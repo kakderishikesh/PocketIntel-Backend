@@ -15,8 +15,19 @@ The PocketIntel backend is the core logic engine of the platform. It processes u
 
 It also handles execution of dynamic Python code, manages agent coordination, and formats outputs for rendering on the frontend.
 
----
+## How Perplexity Sonar was used?
+The Perplexity Sonar API was central to the entire pipeline, acting as both the intent recognizer and contextual research engine. Here's how it powered the system:
+- Intent Classification
+Each user query was first passed through Sonar to determine whether it required a direct factual answer or a more comprehensive 360° data-driven analysis. This helped the system dynamically decide whether to run lightweight logic or invoke full chart and insight generation.
 
+- Subject and Focus Extraction
+Sonar’s structured output provided the primary subject (e.g. a company, sector, or trend) and focus area (e.g. stock performance, social interest, news sentiment). These were used to guide which APIs to call (like Tiingo, Google Trends, or Polygon.io) and what types of visualizations to create.
+
+- Article Insights and Sentiment Enrichment
+For queries requiring deeper context, Sonar was used to fetch curated article summaries, citations, and sentiment signals. These insights were embedded alongside charts to provide users with both quantitative and qualitative context.
+
+- Metadata-Driven Report Generation
+The parsed output from Sonar was merged with system-generated metadata to produce cohesive, multi-block reports. This structure allowed the frontend to render each section: charts, metrics, and text, dynamically and in context.
 ## Core Features
 
 - **Natural Language Query Interpretation**  
