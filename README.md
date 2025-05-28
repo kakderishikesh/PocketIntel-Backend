@@ -9,7 +9,7 @@ The backend is built with **FastAPI**, designed to be modular, async-first, and 
 * Link to the deployed website: https://pocketintel.vercel.app/
 * Link to the Frontend Repo (private access only): https://github.com/kakderishikesh/PocketIntel-Frontend 
 
-## 🧠 Project Overview
+## Project Overview
 
 The PocketIntel backend is the core logic engine of the platform. It processes user queries, interprets the intent using Sonar, fetches structured data from external APIs, and returns chart-ready data blocks enriched with contextual metadata and insights.
 
@@ -17,7 +17,7 @@ It also handles execution of dynamic Python code, manages agent coordination, an
 
 ---
 
-## 🔍 Core Features
+## Core Features
 
 - **Natural Language Query Interpretation**  
   Uses Perplexity Sonar API to extract subject and focus from freeform text.
@@ -35,14 +35,14 @@ It also handles execution of dynamic Python code, manages agent coordination, an
   Modular support for Tiingo (stock prices), Google Trends, Polygon.io (news), and more.
 
 - **Smart Fallback Handling**  
-  Switches between data providers (e.g., Tiingo → yFinance) based on availability and rate limits.
+  Switches between data providers (e.g., Tiingo → Polygon) based on availability and rate limits.
 
 - **Direct Answer Mode**  
   Bypasses full pipeline for low-context queries to return fast, focused results.
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 - **Framework**: FastAPI
 - **Language**: Python 3.11+
@@ -58,7 +58,7 @@ It also handles execution of dynamic Python code, manages agent coordination, an
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 PocketIntel-Backend/
@@ -87,7 +87,7 @@ PocketIntel-Backend/
 ├── runtime.txt # Python runtime version for deployment
 ├── README.md # Project documentation (this file)
 ```
-## 🚀 Getting Started
+## Getting Started
 
 1. **Clone the repository**
    ```bash
@@ -110,13 +110,13 @@ PocketIntel-Backend/
     uvicorn main:app --reload
     ```
 
-## 🧩 Key Endpoints
+## Key Endpoints
   ```
   POST /analyze
   ```
 Accepts a query string and returns structured analysis blocks for frontend rendering.
 
-## 📡 External APIs Used
+## External APIs Used
  - Perplexity Sonar	Intent detection + article insights
  - Tiingo	Historical stock price data
  - Polygon.io	Fallback stock data provider
