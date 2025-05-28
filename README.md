@@ -32,7 +32,7 @@ It also handles execution of dynamic Python code, manages agent coordination, an
   Fully async backend that supports parallel data retrieval from external APIs.
 
 - **External Data Connectors**  
-  Modular support for Tiingo (stock prices), Google Trends, Polygon.io (news), and more.
+  Modular support for Tiingo (stock prices), Google Trends, NewsAPI (news), and more.
 
 - **Smart Fallback Handling**  
   Switches between data providers (e.g., Tiingo → Polygon) based on availability and rate limits.
