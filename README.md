@@ -102,18 +102,18 @@ PocketIntel-Backend/
     SONAR_API_KEY=your_key
     ```
 3. **Install dependencies**
-  ```
+    ```
    pip install -r requirements.txt
-  ```
+    ```
 4. **Run the server**
-  ```
-      uvicorn main:app --reload
-  ```
+    ```
+    uvicorn main:app --reload
+    ```
 
 ## 🧩 Key Endpoints
-```
-POST /analyze
-```
+  ```
+  POST /analyze
+  ```
 Accepts a query string and returns structured analysis blocks for frontend rendering.
 
 ## 📡 External APIs Used
