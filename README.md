@@ -60,6 +60,7 @@ It also handles execution of dynamic Python code, manages agent coordination, an
 
 ## 📁 Project Structure
 
+```
 PocketIntel-Backend/
 ├── charts/
 │ ├── connectors/ # External data API clients
@@ -85,7 +86,7 @@ PocketIntel-Backend/
 ├── requirements.txt # Python dependencies
 ├── runtime.txt # Python runtime version for deployment
 ├── README.md # Project documentation (this file)
-
+```
 ## 🚀 Getting Started
 
 1. **Clone the repository**
