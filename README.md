@@ -1,6 +1,6 @@
 # PocketIntel Backend
 
-**PocketIntel** is a real-time, AI-powered financial insights platform that helps users make informed decisions by converting natural language queries into structured analysis and visualizations.
+**PocketIntel** is a real-time, **AI-powered financial insights platform** that helps users make informed decisions by converting natural language queries into structured analysis and visualizations.
 
 The backend is built with **FastAPI**, designed to be modular, async-first, and capable of dynamically generating insights using the **Perplexity Sonar API** along with external financial data sources.
 
